@@ -1,12 +1,31 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react';
+import React,{useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Steps from './Steps';
 import person from '../Images/person.jpeg';
 import Container from '@material-ui/core/Container';
+import { slice, concat } from 'lodash'
+
 
 export default function Card(props) {
-  const renderCard = props.data.map((data) => {
+  const dataLength = props.data.length
+  const limitedData = props.limit
+
+  const [showMore, setShowMore] = useState(true)
+  const [list, setList] = useState(slice(props.data, 0, limitedData))
+  const [index, setIndex] = useState(limitedData)
+
+  const loadMore = () => {
+    const newIndex = index + limitedData
+    const newShowMore = newIndex < (dataLength - 1)
+    const newList = concat(list, slice(props.data, index, newIndex))
+    setIndex(newIndex)
+    setList(newList)
+    setShowMore(newShowMore)
+  }
+
+
+  const renderCard = list.map((data) => {
     return (
       <>
         {console.log('Hey', data.fields.name)}
@@ -74,8 +93,11 @@ export default function Card(props) {
           </div>
         </Paper>
       </>
-    );
-  });
+    )
+  })
 
-  return <Container maxWidth='sm'>{renderCard}</Container>;
+  return <Container maxWidth='sm'>
+    {renderCard}
+    {showMore && <button onClick={loadMore}> Load More </button>}
+    </Container>;
 }
