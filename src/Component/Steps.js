@@ -72,7 +72,7 @@ export default function Steps() {
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
-          <div>
+          <div style={{marginLeft:"30px"}}>
             <Typography className={classes.instructions}>
             {getStepContent(activeStep)}
             </Typography>
