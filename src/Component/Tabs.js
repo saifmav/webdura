@@ -48,6 +48,7 @@ const CenterTab = () => {
           <Card 
           clickable={nextTab}
           data ={datas}
+          limit={5} 
           />
         </TabPanel>
         <TabPanel value='2'>
@@ -56,6 +57,7 @@ const CenterTab = () => {
           <Card 
           clickable={nextTab}
           data ={datas}
+          limit={5} 
           />
         </TabPanel>
         <TabPanel value='3'>

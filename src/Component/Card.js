@@ -3,6 +3,7 @@ import React,{useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Steps from './Steps';
 import person from '../Images/person.jpeg';
+import { Button } from 'reactstrap';
 import Container from '@material-ui/core/Container';
 import { slice, concat } from 'lodash'
 
@@ -98,6 +99,8 @@ export default function Card(props) {
 
   return <Container maxWidth='sm'>
     {renderCard}
-    {showMore && <button onClick={loadMore}> Load More </button>}
+      <div  style={{ display:'flex', justifyContent:'center'}}>
+      {showMore ? showMore && <Button onClick={loadMore} outline color="secondary">View More</Button>: 'No More Services Requests '}
+      </div>
     </Container>;
 }
