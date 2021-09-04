@@ -1,25 +1,10 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import yoga from "../Images/yoga.jpeg";
 import Slider from "react-slick";
 import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginTop: "35px",
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-}));
 
 const sliderItems = [
   {
@@ -47,7 +32,7 @@ const renderSlides = () =>
     <div className="carousel container">
       <div className="row ">
         <div className="carousel-img col-12 col-md ">
-          <img src={elem.img} style={{display:"inline"}}/>
+          <img src={elem.img} alt='yoga' style={{display:"inline"}}/>
         </div>
         <div className="col-12 col-md " style={{ textAlign: "left" }}>
           <h2>{elem.heading}</h2>
@@ -62,15 +47,6 @@ const renderSlides = () =>
     </div>
   ));
 const Carousel = (props) => {
-  const classes = useStyles();
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
   return (
     <div>
       <Container>
