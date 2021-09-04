@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* .carousel{
+  border:2px solid rebeccapurple;
+} */
+
+.slick-slide img {
+  height: 230px;
+  width:330px;
+}
+/* .slick-slider{
+  margin-top:20px;
+  border:2px solid green
+}
+@media only screen and (max-width:550px) {
+  .slick-slide img{
+    height:100px;
+    width:150px;
+  }
+
+}
+
+@media only screen and (max-width:550px) {
+  .slick-slide{
+    width:370px;
+    height:160px;
+  }
+} */
