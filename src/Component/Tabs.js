@@ -20,31 +20,31 @@ const CenterTab = () => {
   const classes = useStyles();
   const [datas ,setDatas] = useState(data)
   const [value, setValue] = useState('1');
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(0)
+  const [services, setServices ] = useState([])
+  
+  
+  const handleNext = (id) => {
+    data.forEach((dt) => {
+      if (id === dt.fields.id) {
+        setServices([...services, dt])
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }
+    })
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    const remove =  datas.filter(dt => dt.fields.id !== id )
+    setDatas(remove)
   }
 
-  const handleBack = () => {
+
+  const handleBack = (id) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
 
-  const handleReset = () => {
+  const handleReset = (id) => {
     setActiveStep(0);
   }
-
-  // const status = {
-  //   '0': 'Request',
-  //   '1': 'Service',
-  //   '2': 'Payment'
-  // }
-  //  const RequestData = []
-  // const Services  = []
-  // const Payment = []
   
-
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -67,7 +67,7 @@ const CenterTab = () => {
           <div style={{marginTop:"40px"}}></div>
           <Card 
           clickable={nextTab}
-          data ={datas}
+          data={datas}
           limit={5} 
           actStep ={activeStep}
           next={handleNext}
@@ -80,7 +80,7 @@ const CenterTab = () => {
           <div style={{marginTop:"40px"}}></div>
           <Card 
           clickable={nextTab}
-          data ={datas}
+          data ={services}
           limit={5} 
           actStep ={activeStep}
           next={handleNext}

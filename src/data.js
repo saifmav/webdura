@@ -2,7 +2,7 @@ import img1 from './Images/person.jpeg'
 const data = [
   {
     fields: {
-      id:'1',
+      id: 0,
       name: 'Ray Pressley',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -28,7 +28,7 @@ const data = [
   },
   {
     fields: {
-      id:'2',
+      id: 1,
       name: 'Saifali Mavami',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -54,7 +54,7 @@ const data = [
   },
   {
     fields: {
-      id:'3',
+      id: 2,
       name: 'Ravi Pressley',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -80,7 +80,7 @@ const data = [
   },
   {
     fields: {
-      id:'3',
+      id: 3,
       name: 'Avijeet Pressley',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -106,7 +106,7 @@ const data = [
   },
   {
     fields: {
-      id:'4',
+      id: 4,
       name: 'chinu Pressley',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -132,7 +132,7 @@ const data = [
   },
   {
     fields: {
-      id:'5',
+      id: 5,
       name: 'Dipti patil',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -158,7 +158,7 @@ const data = [
   },
   {
     fields: {
-      id:'6',
+      id: 6,
       name: 'Devika Choudhary',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
@@ -184,7 +184,7 @@ const data = [
   },
   {
     fields: {
-      id:'7',
+      id: 7,
       name: 'Rahil Ray',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',

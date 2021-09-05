@@ -32,10 +32,9 @@ export default function Card(props) {
 
   const steps = getSteps()
 
-  const renderCard = list.map((data) => {
+  const renderCard = props.data.map((data,index) => {
     return (
       <>
-        {console.log('Hey', data.fields.name)}
         <Paper elevation={3}>
           <div className='container'>
             <div className='row '>
@@ -102,8 +101,8 @@ export default function Card(props) {
                 {data.fields.address}
               </p>
             </div>
-            <Button  disabled={props.actStep === 0}  onClick={props.back}>Rescheduled</Button>
-            <Button onClick={props.next} >{props.actStep === steps.length - 1 ? "Finish" : "Next"}</Button>
+            <Button   disabled={props.actStep === 0}  onClick={props.back}>Rescheduled</Button>
+            <Button   onClick={()=>props.next(index)} >{props.actStep === steps.length - 1 ? "Finish" : "Next"}</Button>
           </div>
         </Paper>
       </>
