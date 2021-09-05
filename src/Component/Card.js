@@ -3,12 +3,13 @@ import React,{useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Steps from './Steps';
 import person from '../Images/person.jpeg';
-import { Button } from 'reactstrap';
+import Button from "@material-ui/core/Button";
 import Container from '@material-ui/core/Container';
 import { slice, concat } from 'lodash'
 
 
 export default function Card(props) {
+
   const dataLength = props.data.length
   const limitedData = props.limit
 
@@ -25,6 +26,11 @@ export default function Card(props) {
     setShowMore(newShowMore)
   }
 
+  const getSteps = ()=> {
+    return ["Request", "Service", "Payment"]
+  }
+
+  const steps = getSteps()
 
   const renderCard = list.map((data) => {
     return (
@@ -64,7 +70,12 @@ export default function Card(props) {
                     </p>
                   </div>
                   <div className='col-sm-6'>
-                    <Steps status={data.fields.status} />
+                    <Steps 
+                    status={data.fields.status} 
+                    step={steps} 
+                    handleReset={props.next}
+                    activeStep={props.actStep}
+                    />
                   </div>
                 </div>
               </div>
@@ -91,6 +102,8 @@ export default function Card(props) {
                 {data.fields.address}
               </p>
             </div>
+            <Button  disabled={props.actStep === 0}  onClick={props.back}>Rescheduled</Button>
+            <Button onClick={props.next} >{props.actStep === steps.length - 1 ? "Finish" : "Next"}</Button>
           </div>
         </Paper>
       </>

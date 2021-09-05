@@ -20,9 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ["Request", "Service", "Payment"];
-}
+
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
@@ -37,34 +35,19 @@ function getStepContent(stepIndex) {
   }
 }
 
-export default function Steps() {
+export default function Steps({step, handleReset, activeStep}) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
+        {step.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       <div>
-        {activeStep === steps.length ? (
+        {activeStep === step.length ? (
           <div>
             <Typography className={classes.instructions}>
               All steps completed
@@ -77,16 +60,6 @@ export default function Steps() {
             {getStepContent(activeStep)}
             </Typography>
             <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
             </div>
           </div>
         )}

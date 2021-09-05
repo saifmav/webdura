@@ -19,17 +19,37 @@ const useStyles = makeStyles((theme) => ({
 const CenterTab = () => {
   const classes = useStyles();
   const [datas ,setDatas] = useState(data)
-  console.log("🚀 ~ file: Tabs.js ~ line 22 ~ CenterTab ~ datas", datas)
   const [value, setValue] = useState('1');
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  }
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  }
+
+  const handleReset = () => {
+    setActiveStep(0);
+  }
+
+  // const status = {
+  //   '0': 'Request',
+  //   '1': 'Service',
+  //   '2': 'Payment'
+  // }
+  //  const RequestData = []
+  // const Services  = []
+  // const Payment = []
+  
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    return newValue
   };
   const nextTab = (index) => {
     setValue(index)
-    return index
-    // setValue(prevState=>{ let nextState = (parseInt(prevState)+1)+"" ; return nextState })
   }
 
   return (
@@ -49,6 +69,10 @@ const CenterTab = () => {
           clickable={nextTab}
           data ={datas}
           limit={5} 
+          actStep ={activeStep}
+          next={handleNext}
+          back={handleBack}
+          reset={handleReset}
           />
         </TabPanel>
         <TabPanel value='2'>
@@ -58,6 +82,11 @@ const CenterTab = () => {
           clickable={nextTab}
           data ={datas}
           limit={5} 
+          actStep ={activeStep}
+          next={handleNext}
+          back={handleBack}
+          reset={handleReset}
+
           />
         </TabPanel>
         <TabPanel value='3'>
@@ -67,9 +96,10 @@ const CenterTab = () => {
           clickable={nextTab}
           data={datas}
           limit={5} 
+          actStep ={activeStep}
+          reset={handleReset}
           />
         </TabPanel>
-
       </TabContext>
     </div>
   );
