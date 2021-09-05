@@ -1,10 +1,14 @@
-import React from "react";
+import React,{useContext, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@material-ui/core/Typography"
+import { ServicesContext } from "../Context/ServicesProvider"
+import { DataContext } from "../Context/DataProvider";
+// import { ActiveStepContext } from "../Context/ActiveStepProvider";
+import data from '../data'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+function getSteps() {
+  return ["Request", "Service", "Payment"];
+}
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
@@ -35,19 +41,46 @@ function getStepContent(stepIndex) {
   }
 }
 
-export default function Steps({step, handleReset, activeStep}) {
+export default function Steps({id,ind}) {
   const classes = useStyles();
+  const [activeStep, setActiveStep] = useState(0)
+  const [services, setServices] = useContext(ServicesContext)
+  const [allData, setAllData] = useContext(DataContext)
+  const steps = getSteps();
+
+  const handleNext = () => {
+    data.forEach((dt) => {
+      if (ind === dt.fields.id) {
+        setServices([...services, dt])
+      }
+    })
+    if(id === ind){
+      setActiveStep((prevActiveStep) => prevActiveStep + 1)
+    }
+    const remove =  allData.filter(dt => dt.fields.id !== id )
+    setAllData(remove)
+  
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
-        {step.map((label) => (
+        {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
       <div>
-        {activeStep === step.length ? (
+        {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
               All steps completed
@@ -60,6 +93,16 @@ export default function Steps({step, handleReset, activeStep}) {
             {getStepContent(activeStep)}
             </Typography>
             <div>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.backButton}
+              >
+                Back
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleNext}>
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button>
             </div>
           </div>
         )}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
@@ -7,7 +7,10 @@ import TabList from '@material-ui/lab/TabList'
 import TabPanel from '@material-ui/lab/TabPanel'
 import Carousal from './Carousel'
 import Card from './Card'
-import data from '../data'
+// import data from '../data'
+import { ServicesContext } from '../Context/ServicesProvider'
+import { DataContext } from '../Context/DataProvider'
+import { PaymentContext } from '../Context/PaymentProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,36 +21,18 @@ const useStyles = makeStyles((theme) => ({
 
 const CenterTab = () => {
   const classes = useStyles();
-  const [datas ,setDatas] = useState(data)
   const [value, setValue] = useState('1');
-  const [activeStep, setActiveStep] = useState(0)
-  const [services, setServices ] = useState([])
+  const [services, setServices ] = useContext(ServicesContext)
+  const [allData, setAllData]= useContext(DataContext)
+  // const [payment, setPayment]= useContext(services)
   
   
-  const handleNext = (id) => {
-    data.forEach((dt) => {
-      if (id === dt.fields.id) {
-        setServices([...services, dt])
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      }
-    })
 
-    const remove =  datas.filter(dt => dt.fields.id !== id )
-    setDatas(remove)
-  }
-
-
-  const handleBack = (id) => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  }
-
-  const handleReset = (id) => {
-    setActiveStep(0);
-  }
   
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
+  }
+
   const nextTab = (index) => {
     setValue(index)
   }
@@ -67,12 +52,8 @@ const CenterTab = () => {
           <div style={{marginTop:"40px"}}></div>
           <Card 
           clickable={nextTab}
-          data={datas}
+          data={allData}
           limit={5} 
-          actStep ={activeStep}
-          next={handleNext}
-          back={handleBack}
-          reset={handleReset}
           />
         </TabPanel>
         <TabPanel value='2'>
@@ -82,11 +63,6 @@ const CenterTab = () => {
           clickable={nextTab}
           data ={services}
           limit={5} 
-          actStep ={activeStep}
-          next={handleNext}
-          back={handleBack}
-          reset={handleReset}
-
           />
         </TabPanel>
         <TabPanel value='3'>
@@ -94,10 +70,8 @@ const CenterTab = () => {
           <div style={{marginTop:"40px"}}></div>
           <Card 
           clickable={nextTab}
-          data={datas}
+          // data={payment}
           limit={5} 
-          actStep ={activeStep}
-          reset={handleReset}
           />
         </TabPanel>
       </TabContext>

@@ -9,12 +9,12 @@ import { slice, concat } from 'lodash'
 
 
 export default function Card(props) {
-
+  let cardData = props.data
   const dataLength = props.data.length
   const limitedData = props.limit
 
   const [showMore, setShowMore] = useState(true)
-  const [list, setList] = useState(slice(props.data, 0, limitedData))
+  const [list, setList] = useState(slice(cardData, 0, limitedData))
   const [index, setIndex] = useState(limitedData)
 
   const loadMore = () => {
@@ -26,13 +26,8 @@ export default function Card(props) {
     setShowMore(newShowMore)
   }
 
-  const getSteps = ()=> {
-    return ["Request", "Service", "Payment"]
-  }
 
-  const steps = getSteps()
-
-  const renderCard = props.data.map((data,index) => {
+  const renderCard = list.map((data,index) => {
     return (
       <>
         <Paper elevation={3}>
@@ -71,9 +66,8 @@ export default function Card(props) {
                   <div className='col-sm-6'>
                     <Steps 
                     status={data.fields.status} 
-                    step={steps} 
-                    handleReset={props.next}
-                    activeStep={props.actStep}
+                    id={data.fields.id}
+                    ind={index}  
                     />
                   </div>
                 </div>
@@ -101,8 +95,8 @@ export default function Card(props) {
                 {data.fields.address}
               </p>
             </div>
-            <Button   disabled={props.actStep === 0}  onClick={props.back}>Rescheduled</Button>
-            <Button   onClick={()=>props.next(index)} >{props.actStep === steps.length - 1 ? "Finish" : "Next"}</Button>
+            {/* <Button   disabled={props.actStep === 0}  onClick={props.back}>Rescheduled</Button>
+            <Button   onClick={()=>props.next(index)} >{props.actStep === steps.length - 1 ? "Finish" : "Next"}</Button> */}
           </div>
         </Paper>
       </>

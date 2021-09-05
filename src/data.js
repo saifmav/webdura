@@ -184,7 +184,7 @@ const data = [
   },
   {
     fields: {
-      id: 7,
+      id: 6,
       name: 'Rahil Ray',
       location: 'San Francisco',
       slug: 'you two had 12 deals before',
